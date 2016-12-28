@@ -1,0 +1,10 @@
+*.pyc
+*.mo
+migrations
+/staticfiles/
+/static/
+*.sqlite3
+/build/
+/dist/
+/django-endless-pagination-vue.egg-info/
+/.venv/

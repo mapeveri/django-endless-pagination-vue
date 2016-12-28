@@ -1,0 +1,46 @@
+{% extends "base_callbacks.html" %}
+
+{% block content %}
+  <div id="endless" class="span8" v-endless-pagination="{'pageSelector': '#endless', 'onClick': 'callbacks_click', 'onCompleted': 'callbacks_completed' }">
+    {% include page_template %}
+  </div>
+  <div class="span4">
+    <div class="well">
+      <h4>Notifications</h4>
+      <div id="notifications">None so far...</div>
+    </div>
+  </div>
+
+{% endblock %}
+
+{% block extend_js %}
+<script>
+	new Vue({
+		el: '#endless',
+    methods: {
+      callbacks_click: function(ev){
+          var notif = document.querySelector('#notifications');
+          notif.innerHtml = "";
+          var content = "";
+          content += "onclick: First object on click " + document.querySelector('#endless h4').innerHtml;
+          content += " onclick-label: Clicked label " + this.value;
+          content += " onclick-url: URL " + ev.url;
+          content += " onclick-key: Querystring key " + ev.key;
+
+          notif.textContent = content;
+      },
+      callbacks_completed: function(ev) {
+          var notif = document.querySelector('#notifications');
+          notif.innerHtml = "";
+          var content = "";
+          content += "onclick: First object on click " + document.querySelector('#endless h4').innerHtml;
+          content += " onclick-label: Clicked label " + this.value;
+          content += " onclick-url: URL " + ev.url;
+          content += " onclick-key: Querystring key " + ev.key;
+
+          notif.textContent = content;
+      }
+    }
+	});
+</script>
+{% endblock  %}
