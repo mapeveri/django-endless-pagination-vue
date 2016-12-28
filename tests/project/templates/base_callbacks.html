@@ -7,6 +7,7 @@
     <link href="{{ STATIC_URL }}pagination.css" rel="stylesheet">
   </head>
   <body>
+    {% load static %}
     <div class="container">
       <dl class="dl-horizontal pull-right">
         {% for name, value in versions %}
@@ -37,7 +38,7 @@
     </div>
     {% block js %}
       <script src="https://unpkg.com/vue/dist/vue.min.js"></script>
-      <script src="{% url 'endless_pagination/js/module.endless.js' %}"></script>
+      <script src="{% static 'endless_pagination/js/module.endless.js' %}"></script>
     {% endblock %}
 
     {% block extend_js %}
