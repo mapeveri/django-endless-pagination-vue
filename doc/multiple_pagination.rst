@@ -77,7 +77,7 @@ seen in :ref:`Digg-style pagination and Ajax<digg-ajax>`.
 
         {% block js %}
             <script src="https://unpkg.com/vue/dist/vue.min.js"></script>
-            <script src="{% url 'endless_pagination/js/module.endless.js' %}"></script>
+            <script src="{% static 'endless_pagination/js/module.endless.js' %}"></script>
 
             new Vue({
                 el: '#entries',
@@ -181,7 +181,7 @@ What if you need Ajax pagination only for *entries* and not for
 
     {% block js %}
         <script src="https://unpkg.com/vue/dist/vue.min.js"></script>
-        <script src="{% url 'endless_pagination/js/module.endless.js' %}"></script>
+        <script src="{% static 'endless_pagination/js/module.endless.js' %}"></script>
 
         new Vue({
             el: '#idelement',

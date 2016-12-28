@@ -23,7 +23,7 @@ Usage:
     {% block js %}
         {{ block.super }}
         <script src="https://unpkg.com/vue/dist/vue.min.js"></script>
-      	<script src="{% url 'endless_pagination/js/module.endless.js' %}"></script>
+      	<script src="{% static 'endless_pagination/js/module.endless.js' %}"></script>
     {% endblock %}
 
 The last line in the block above enables Ajax requests to retrieve new
@@ -247,7 +247,7 @@ A template for multiple pagination with Http support may look like this
 
         {% block js %}
             <script src="https://unpkg.com/vue/dist/vue.min.js"></script>
-      	    <script src="{% url 'endless_pagination/js/module.endless.js' %}"></script>
+      	    <script src="{% static 'endless_pagination/js/module.endless.js' %}"></script>
         {% endblock %}
     </div>
 

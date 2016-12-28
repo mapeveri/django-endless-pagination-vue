@@ -23,7 +23,7 @@ Ajax support is activated linking Vue.js and the directive ``endless-pagination`
         {% block js %}
             {{ block.super }}
             <script src="https://unpkg.com/vue/dist/vue.min.js"></script>
-      	    <script src="{% url 'endless_pagination/js/module.endless.js' %}"></script>
+      	    <script src="{% static 'endless_pagination/js/module.endless.js' %}"></script>
 
             new Vue({
                 el: '#entries',
@@ -58,7 +58,7 @@ you can use the **pagination on scroll** feature: just set the
 
         {% block js %}
             <script src="https://unpkg.com/vue/dist/vue.min.js"></script>
-      	    <script src="{% url 'endless_pagination/js/module.endless.js' %}"></script>
+      	    <script src="{% static 'endless_pagination/js/module.endless.js' %}"></script>
 
             new Vue({
                 el: '#entries',
@@ -83,7 +83,7 @@ to be activated when 20 pixels remain to the end of the page:
 
         {% block js %}
             <script src="https://unpkg.com/vue/dist/vue.min.js"></script>
-      	    <script src="{% url 'endless_pagination/js/module.endless.js' %}"></script>
+      	    <script src="{% static 'endless_pagination/js/module.endless.js' %}"></script>
 
             new Vue({
                 el: '#entries',
@@ -114,7 +114,7 @@ link, e.g.:
 
         {% block js %}
             <script src="https://unpkg.com/vue/dist/vue.min.js"></script>
-      	    <script src="{% url 'endless_pagination/js/module.endless.js' %}"></script>
+      	    <script src="{% static 'endless_pagination/js/module.endless.js' %}"></script>
 
             new Vue({
                 el: '#entries',
@@ -157,7 +157,7 @@ To wrap it up, here is an example showing the callbacks' signatures:
 
     {% block js %}
         <script src="https://unpkg.com/vue/dist/vue.min.js"></script>
-        <script src="{% url 'endless_pagination/js/module.endless.js' %}"></script>
+        <script src="{% static 'endless_pagination/js/module.endless.js' %}"></script>
 
         new Vue({
             el: '#endless',
@@ -198,7 +198,7 @@ in the page. But assuming you are using :doc:`multiple_pagination`, e.g.:
 
     {% block js %}
         <script src="https://unpkg.com/vue/dist/vue.min.js"></script>
-        <script src="{% url 'endless_pagination/js/module.endless.js' %}"></script>
+        <script src="{% static 'endless_pagination/js/module.endless.js' %}"></script>
 
         new Vue({
             el: '#entries',
@@ -242,7 +242,7 @@ have a Digg-style pagination like the following:
 
         {% block js %}
             <script src="https://unpkg.com/vue/dist/vue.min.js"></script>
-            <script src="{% url 'endless_pagination/js/module.endless.js' %}"></script>
+            <script src="{% static 'endless_pagination/js/module.endless.js' %}"></script>
 
             new Vue({
                 el: '#entries',
@@ -266,7 +266,7 @@ and does not involve adding another class to the container:
 
     {% block js %}
         <script src="https://unpkg.com/vue/dist/vue.min.js"></script>
-        <script src="{% url 'endless_pagination/js/module.endless.js' %}"></script>
+        <script src="{% static 'endless_pagination/js/module.endless.js' %}"></script>
 
         new Vue({
             el: '#entries',
@@ -291,7 +291,7 @@ link is displayed after page 5 is loaded, then after page 10, then after page
 
     {% block js %}
         <script src="https://unpkg.com/vue/dist/vue.min.js"></script>
-        <script src="{% url 'endless_pagination/js/module.endless.js' %}"></script>
+        <script src="{% static 'endless_pagination/js/module.endless.js' %}"></script>
 
         new Vue({
             el: '#entries',
@@ -336,7 +336,7 @@ Now:
 
         {% block js %}
             <script src="https://unpkg.com/vue/dist/vue.min.js"></script>
-            <script src="{% url 'endless_pagination/js/module.endless.js' %}"></script>
+            <script src="{% static 'endless_pagination/js/module.endless.js' %}"></script>
 
             new Vue({
                 el: '#entries',
@@ -375,7 +375,7 @@ Now:
 
         {% block js %}
             <script src="https://unpkg.com/vue/dist/vue.min.js"></script>
-            <script src="{% url 'endless_pagination/js/module.endless.js' %}"></script>
+            <script src="{% static 'endless_pagination/js/module.endless.js' %}"></script>
 
             new Vue({
                 el: '#entries',
@@ -417,7 +417,7 @@ Now:
 
         {% block js %}
             <script src="https://unpkg.com/vue/dist/vue.min.js"></script>
-            <script src="{% url 'endless_pagination/js/module.endless.js' %}"></script>
+            <script src="{% static 'endless_pagination/js/module.endless.js' %}"></script>
 
             new Vue({
                 el: '#entries',
@@ -457,7 +457,7 @@ Now:
 
         {% block js %}
             <script src="https://unpkg.com/vue/dist/vue.min.js"></script>
-            <script src="{% url 'endless_pagination/js/module.endless.js' %}"></script>
+            <script src="{% static 'endless_pagination/js/module.endless.js' %}"></script>
 
             new Vue({
                 el: '#entries',

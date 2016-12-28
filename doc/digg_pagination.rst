@@ -132,7 +132,7 @@ class named *endless_page_template*.
 
         {% block js %}
             <script src="https://unpkg.com/vue/dist/vue.min.js"></script>
-      	<script src="{% url 'endless_pagination/js/module.endless.js' %}"></script>
+      	<script src="{% static 'endless_pagination/js/module.endless.js' %}"></script>
         {% endblock %}
 
         <script>
@@ -171,7 +171,7 @@ by customizing the *pageSelector* option of directive *endless-pagination*, e.g.
 
         {% block js %}
             <script src="https://unpkg.com/vue/dist/vue.min.js"></script>
-      	    <script src="{% url 'endless_pagination/js/module.endless.js' %}"></script>
+      	    <script src="{% static 'endless_pagination/js/module.endless.js' %}"></script>
 
             <script>
 				new Vue({

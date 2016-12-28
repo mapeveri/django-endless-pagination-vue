@@ -24,7 +24,7 @@ Documentation
 -------------
 
 **Documentation** is `avaliable online
-<http://django-endless-pagination-vue.readthedocs.org/>`_, or in the **doc*
+<http://django-endless-pagination-vue.readthedocs.org/>`_, or in the **doc**
 directory of the project.
 
 Installation
@@ -73,7 +73,7 @@ Base.html::
 	    </div>
 	    {% block js %}
 	      <script src="https://unpkg.com/vue/dist/vue.min.js"></script>
-      	<script src="{% url 'endless_pagination/js/module.endless.js' %}"></script>
+      	<script src="{% static 'endless_pagination/js/module.endless.js' %}"></script>
 	    {% endblock %}
 	  </body>
 	</html>
