@@ -143,8 +143,8 @@ Vue.directive('endlessPagination', {
         // Twitter-style pagination.
         var loadedPages = 1;
         el.addEventListener('click', function (ev) {
-            ev.preventDefault();
             if(ev.target.matches(settings.moreSelector)) {
+		        ev.preventDefault();
                 var link = ev.target;
                 var container = link.closest(settings.containerSelector);
                 var loading = document.querySelector(settings.loadingSelector);
@@ -207,8 +207,8 @@ Vue.directive('endlessPagination', {
 
         // Digg-style pagination.
         el.addEventListener('click', function (ev) {
-            ev.preventDefault();
             if(ev.target.matches(settings.pagesSelector)) {
+		        ev.preventDefault();
                 var link = ev.target;
                 var context = getContext(link);
                 //For get function onClick
