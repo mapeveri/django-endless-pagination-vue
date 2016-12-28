@@ -1,0 +1,244 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Customization &mdash; Django Endless Pagination Vue 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="Django Endless Pagination Vue 1.0 documentation" href="index.html" />
+    <link rel="next" title="Contributing" href="contributing.html" />
+    <link rel="prev" title="Generic views" href="generic_views.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="contributing.html" title="Contributing"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="generic_views.html" title="Generic views"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">Django Endless Pagination Vue 1.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="customization">
+<h1>Customization<a class="headerlink" href="#customization" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="settings">
+<h2>Settings<a class="headerlink" href="#settings" title="Permalink to this headline">¶</a></h2>
+<p>You can customize the application using <tt class="docutils literal"><span class="pre">settings.py</span></tt>.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="33%" />
+<col width="7%" />
+<col width="60%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Default</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><tt class="docutils literal"><span class="pre">ENDLESS_PAGINATION_PER_PAGE</span></tt></td>
+<td>10</td>
+<td>How many objects are normally displayed
+in a page (overwriteable by templatetag).</td>
+</tr>
+<tr class="row-odd"><td><tt class="docutils literal"><span class="pre">ENDLESS_PAGINATION_PAGE_LABEL</span></tt></td>
+<td>&#8216;page&#8217;</td>
+<td>The querystring key of the page number
+(e.g. <tt class="docutils literal"><span class="pre">http://example.com?page=2</span></tt>).</td>
+</tr>
+<tr class="row-even"><td><tt class="docutils literal"><span class="pre">ENDLESS_PAGINATION_ORPHANS</span></tt></td>
+<td>0</td>
+<td>See Django <em>Paginator</em> definition of orphans.</td>
+</tr>
+<tr class="row-odd"><td><tt class="docutils literal"><span class="pre">ENDLESS_PAGINATION_LOADING</span></tt></td>
+<td>&#8216;loading&#8217;</td>
+<td>If you use the default <tt class="docutils literal"><span class="pre">show_more</span></tt> template,
+here you can customize the content of the
+loader hidden element. HTML is safe here,
+e.g. you can show your pretty animated GIF
+<tt class="docutils literal"><span class="pre">ENDLESS_PAGINATION_LOADING</span> <span class="pre">=</span> <span class="pre">&quot;&quot;&quot;&lt;img</span> <span class="pre">src=&quot;/static/img/loader.gif&quot;</span> <span class="pre">alt=&quot;loading&quot;</span> <span class="pre">/&gt;&quot;&quot;&quot;</span></tt>.</td>
+</tr>
+<tr class="row-even"><td><tt class="docutils literal"><span class="pre">ENDLESS_PAGINATION_PREVIOUS_LABEL</span></tt></td>
+<td>&#8216;&lt;&#8217;</td>
+<td>Default label for the <em>previous</em> page link.</td>
+</tr>
+<tr class="row-odd"><td><tt class="docutils literal"><span class="pre">ENDLESS_PAGINATION_NEXT_LABEL</span></tt></td>
+<td>&#8216;&gt;&#8217;</td>
+<td>Default label for the <em>next</em> page link.</td>
+</tr>
+<tr class="row-even"><td><tt class="docutils literal"><span class="pre">ENDLESS_PAGINATION_FIRST_LABEL</span></tt></td>
+<td>&#8216;&lt;&lt;&#8217;</td>
+<td>Default label for the <em>first</em> page link.</td>
+</tr>
+<tr class="row-odd"><td><tt class="docutils literal"><span class="pre">ENDLESS_PAGINATION_LAST_LABEL</span></tt></td>
+<td>&#8216;&gt;&gt;&#8217;</td>
+<td>Default label for the <em>last</em> page link.</td>
+</tr>
+<tr class="row-even"><td><tt class="docutils literal"><span class="pre">ENDLESS_PAGINATION_ADD_NOFOLLOW</span></tt></td>
+<td><em>False</em></td>
+<td>Set to <em>True</em> if your SEO alchemist
+wants search engines not to follow
+pagination links.</td>
+</tr>
+<tr class="row-odd"><td><tt class="docutils literal"><span class="pre">ENDLESS_PAGINATION_PAGE_LIST_CALLABLE</span></tt></td>
+<td><em>None</em></td>
+<td>Callable (or dotted path to a callable) that
+returns pages to be displayed.
+If <em>None</em>, a default callable is used;
+that produces <a class="reference internal" href="digg_pagination.html"><em>Digg-style pagination</em></a>.
+The applicationt provides also a callable
+producing elastic pagination:
+<tt class="docutils literal"><span class="pre">endless_pagination.utils.get_elastic_page_numbers</span></tt>.
+It adapts its output to the number of pages,
+making it arguably more usable when there are
+many of them.
+See <a class="reference internal" href="templatetags_reference.html"><em>Templatetags reference</em></a> for
+information about writing custom callables.</td>
+</tr>
+<tr class="row-even"><td><tt class="docutils literal"><span class="pre">ENDLESS_PAGINATION_DEFAULT_CALLABLE_EXTREMES</span></tt></td>
+<td>3</td>
+<td>Deafult number of <em>extremes</em> displayed when
+<a class="reference internal" href="digg_pagination.html"><em>Digg-style pagination</em></a> is used with the
+default callable.</td>
+</tr>
+<tr class="row-odd"><td><tt class="docutils literal"><span class="pre">ENDLESS_PAGINATION_DEFAULT_CALLABLE_AROUNDS</span></tt></td>
+<td>2</td>
+<td>Deafult number of <em>arounds</em> displayed when
+<a class="reference internal" href="digg_pagination.html"><em>Digg-style pagination</em></a> is used with the
+default callable.</td>
+</tr>
+<tr class="row-even"><td><tt class="docutils literal"><span class="pre">ENDLESS_PAGINATION_DEFAULT_CALLABLE_ARROWS</span></tt></td>
+<td><em>False</em></td>
+<td>Whether or not the first and last pages arrows
+are displayed when <a class="reference internal" href="digg_pagination.html"><em>Digg-style pagination</em></a> is
+used with the default callable.</td>
+</tr>
+<tr class="row-odd"><td><tt class="docutils literal"><span class="pre">ENDLESS_PAGINATION_TEMPLATE_VARNAME</span></tt></td>
+<td>&#8216;template&#8217;</td>
+<td>Template variable name used by the
+<tt class="docutils literal"><span class="pre">page_template</span></tt> decorator. You can change
+this value if you are going to decorate
+generic views using a different variable name
+for the template (e.g. <tt class="docutils literal"><span class="pre">template_name</span></tt>).</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="templates-and-css">
+<h2>Templates and CSS<a class="headerlink" href="#templates-and-css" title="Permalink to this headline">¶</a></h2>
+<p>You can override the default template for <tt class="docutils literal"><span class="pre">show_more</span></tt> templatetag following
+some rules:</p>
+<ul class="simple">
+<li><em>more</em> link is shown only if the variable <tt class="docutils literal"><span class="pre">querystring</span></tt> is not False;</li>
+<li>the container (most external html element) class is <em>endless_container</em>;</li>
+<li>the <em>more</em> link and the loader hidden element live inside the container;</li>
+<li>the <em>more</em> link class is <em>endless_more</em>;</li>
+<li>the <em>more</em> link rel attribute is <tt class="docutils literal"><span class="pre">{{</span> <span class="pre">querystring_key</span> <span class="pre">}}</span></tt>;</li>
+<li>the loader hidden element class is <em>endless_loading</em>.</li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Customization</a><ul>
+<li><a class="reference internal" href="#settings">Settings</a></li>
+<li><a class="reference internal" href="#templates-and-css">Templates and CSS</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="generic_views.html"
+                        title="previous chapter">Generic views</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="contributing.html"
+                        title="next chapter">Contributing</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/customization.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="contributing.html" title="Contributing"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="generic_views.html" title="Generic views"
+             >previous</a> |</li>
+        <li><a href="index.html">Django Endless Pagination Vue 1.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2009-2017, Francesco Banconi and Martin Peveri.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

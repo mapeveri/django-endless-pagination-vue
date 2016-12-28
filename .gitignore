@@ -8,3 +8,4 @@ migrations
 /dist/
 /django-endless-pagination-vue.egg-info/
 /.venv/
+/.venv3/

@@ -1,0 +1,140 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Lazy pagination &mdash; Django Endless Pagination Vue 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="Django Endless Pagination Vue 1.0 documentation" href="index.html" />
+    <link rel="next" title="Different number of items on the first page" href="different_first_page.html" />
+    <link rel="prev" title="Multiple paginations in the same page" href="multiple_pagination.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="different_first_page.html" title="Different number of items on the first page"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="multiple_pagination.html" title="Multiple paginations in the same page"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">Django Endless Pagination Vue 1.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="lazy-pagination">
+<h1>Lazy pagination<a class="headerlink" href="#lazy-pagination" title="Permalink to this headline">¶</a></h1>
+<p>Usually pagination requires hitting the database to get the total number of
+items to display. Lazy pagination avoids this <em>select count</em> query and results
+in a faster page load, with a disadvantage: you won&#8217;t know the total number of
+pages in advance.</p>
+<p>For this reason it is better to use lazy pagination in conjunction with
+<a class="reference internal" href="twitter_pagination.html"><em>Twitter-style Pagination</em></a> (e.g. using the <a class="reference internal" href="templatetags_reference.html#templatetags-show-more"><em>show_more</em></a>
+template tag).</p>
+<p>In order to switch to lazy pagination you have to use the
+<a class="reference internal" href="templatetags_reference.html#templatetags-lazy-paginate"><em>lazy_paginate</em></a> template tag instead of the
+<a class="reference internal" href="templatetags_reference.html#templatetags-paginate"><em>paginate</em></a> one, e.g.:</p>
+<div class="highlight-html+django"><div class="highlight"><pre><span></span><span class="cp">{%</span> <span class="k">load</span> <span class="nv">endless</span> <span class="cp">%}</span>
+
+<span class="cp">{%</span> <span class="k">lazy_paginate</span> <span class="nv">entries</span> <span class="cp">%}</span>
+<span class="cp">{%</span> <span class="k">for</span> <span class="nv">entry</span> <span class="k">in</span> <span class="nv">entries</span> <span class="cp">%}</span>
+    <span class="c">{# your code to show the entry #}</span>
+<span class="cp">{%</span> <span class="k">endfor</span> <span class="cp">%}</span>
+<span class="cp">{%</span> <span class="k">show_more</span> <span class="cp">%}</span>
+</pre></div>
+</div>
+<p>The <a class="reference internal" href="templatetags_reference.html#templatetags-lazy-paginate"><em>lazy_paginate</em></a> tag can take all the args of the
+<a class="reference internal" href="templatetags_reference.html#templatetags-paginate"><em>paginate</em></a> one, with one exception: negative indexes can not
+be passed to the <tt class="docutils literal"><span class="pre">starting</span> <span class="pre">from</span> <span class="pre">page</span></tt> argument.</p>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="multiple_pagination.html"
+                        title="previous chapter">Multiple paginations in the same page</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="different_first_page.html"
+                        title="next chapter">Different number of items on the first page</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/lazy_pagination.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="different_first_page.html" title="Different number of items on the first page"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="multiple_pagination.html" title="Multiple paginations in the same page"
+             >previous</a> |</li>
+        <li><a href="index.html">Django Endless Pagination Vue 1.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2009-2017, Francesco Banconi and Martin Peveri.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,424 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Templatetags reference &mdash; Django Endless Pagination Vue 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="Django Endless Pagination Vue 1.0 documentation" href="index.html" />
+    <link rel="next" title="JavaScript reference" href="javascript.html" />
+    <link rel="prev" title="Getting the current page number" href="current_page_number.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="javascript.html" title="JavaScript reference"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="current_page_number.html" title="Getting the current page number"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">Django Endless Pagination Vue 1.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="templatetags-reference">
+<h1>Templatetags reference<a class="headerlink" href="#templatetags-reference" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="paginate">
+<span id="templatetags-paginate"></span><h2>paginate<a class="headerlink" href="#paginate" title="Permalink to this headline">¶</a></h2>
+<p>Usage:</p>
+<div class="highlight-html+django"><div class="highlight"><pre><span></span><span class="cp">{%</span> <span class="k">paginate</span> <span class="nv">entries</span> <span class="cp">%}</span>
+</pre></div>
+</div>
+<p>After this call, the <em>entries</em> variable in the template context is replaced
+by only the entries of the current page.</p>
+<p>You can also keep your <em>entries</em> original variable (usually a queryset)
+and add to the context another name that refers to entries of the current page,
+e.g.:</p>
+<div class="highlight-html+django"><div class="highlight"><pre><span></span><span class="cp">{%</span> <span class="k">paginate</span> <span class="nv">entries</span> <span class="k">as</span> <span class="nv">page_entries</span> <span class="cp">%}</span>
+</pre></div>
+</div>
+<p>The <em>as</em> argument is also useful when a nested context variable is provided
+as queryset. In this case, and only in this case, the resulting variable
+name is mandatory, e.g.:</p>
+<div class="highlight-html+django"><div class="highlight"><pre><span></span><span class="cp">{%</span> <span class="k">paginate</span> <span class="nv">entries.all</span> <span class="k">as</span> <span class="nv">entries</span> <span class="cp">%}</span>
+</pre></div>
+</div>
+<p>The number of paginated entries is taken from settings, but you can
+override the default locally, e.g.:</p>
+<div class="highlight-html+django"><div class="highlight"><pre><span></span><span class="cp">{%</span> <span class="k">paginate</span> <span class="m">20</span> <span class="nv">entries</span> <span class="cp">%}</span>
+</pre></div>
+</div>
+<p>Of course you can mix it all:</p>
+<div class="highlight-html+django"><div class="highlight"><pre><span></span><span class="cp">{%</span> <span class="k">paginate</span> <span class="m">20</span> <span class="nv">entries</span> <span class="k">as</span> <span class="nv">paginated_entries</span> <span class="cp">%}</span>
+</pre></div>
+</div>
+<p>By default, the first page is displayed the first time you load the page,
+but you can change this, e.g.:</p>
+<div class="highlight-html+django"><div class="highlight"><pre><span></span><span class="cp">{%</span> <span class="k">paginate</span> <span class="nv">entries</span> <span class="nv">starting</span> <span class="nv">from</span> <span class="nv">page</span> <span class="m">3</span> <span class="cp">%}</span>
+</pre></div>
+</div>
+<p>When changing the default page, it is also possible to reference the last
+page (or the second last page, and so on) by using negative indexes, e.g:</p>
+<div class="highlight-html+django"><div class="highlight"><pre><span></span><span class="cp">{%</span> <span class="k">paginate</span> <span class="nv">entries</span> <span class="nv">starting</span> <span class="nv">from</span> <span class="nv">page</span> <span class="o">-</span><span class="m">1</span> <span class="cp">%}</span>
+</pre></div>
+</div>
+<p>This can be also achieved using a template variable that was passed to the
+context, e.g.:</p>
+<div class="highlight-html+django"><div class="highlight"><pre><span></span><span class="cp">{%</span> <span class="k">paginate</span> <span class="nv">entries</span> <span class="nv">starting</span> <span class="nv">from</span> <span class="nv">page</span> <span class="nv">page_number</span> <span class="cp">%}</span>
+</pre></div>
+</div>
+<p>If the passed page number does not exist, the first page is displayed.
+Note that negative indexes are specific to the <tt class="docutils literal"><span class="pre">{%</span> <span class="pre">paginate</span> <span class="pre">%}</span></tt> tag: this
+feature cannot be used when contents are lazy paginated (see <a class="reference internal" href="#lazy-paginate">lazy_paginate</a>
+below).</p>
+<p>If you have multiple paginations in the same page, you can change the
+querydict key for the single pagination, e.g.:</p>
+<div class="highlight-html+django"><div class="highlight"><pre><span></span><span class="cp">{%</span> <span class="k">paginate</span> <span class="nv">entries</span> <span class="nv">using</span> <span class="nv">article_page</span> <span class="cp">%}</span>
+</pre></div>
+</div>
+<p>In this case <em>article_page</em> is intended to be a context variable, but you can
+hardcode the key using quotes, e.g.:</p>
+<div class="highlight-html+django"><div class="highlight"><pre><span></span><span class="cp">{%</span> <span class="k">paginate</span> <span class="nv">entries</span> <span class="nv">using</span> <span class="s1">&#39;articles_at_page&#39;</span> <span class="cp">%}</span>
+</pre></div>
+</div>
+<p>Again, you can mix it all (the order of arguments is important):</p>
+<div class="highlight-html+django"><div class="highlight"><pre><span></span><span class="cp">{%</span> <span class="k">paginate</span> <span class="m">20</span> <span class="nv">entries</span> <span class="nv">starting</span> <span class="nv">from</span> <span class="nv">page</span> <span class="m">3</span> <span class="nv">using</span> <span class="nv">page_key</span> <span class="k">as</span> <span class="nv">paginated_entries</span> <span class="cp">%}</span>
+</pre></div>
+</div>
+<p>Additionally you can pass a path to be used for the pagination:</p>
+<div class="highlight-html+django"><div class="highlight"><pre><span></span><span class="cp">{%</span> <span class="k">paginate</span> <span class="m">20</span> <span class="nv">entries</span> <span class="nv">using</span> <span class="nv">page_key</span> <span class="k">with</span> <span class="nv">pagination_url</span> <span class="k">as</span> <span class="nv">paginated_entries</span> <span class="cp">%}</span>
+</pre></div>
+</div>
+<p>This way you can easily create views acting as API endpoints, and point your
+Ajax calls to that API. In this case <em>pagination_url</em> is considered a
+context variable, but it is also possible to hardcode the URL, e.g.:</p>
+<div class="highlight-html+django"><div class="highlight"><pre><span></span><span class="cp">{%</span> <span class="k">paginate</span> <span class="m">20</span> <span class="nv">entries</span> <span class="k">with</span> <span class="s2">&quot;/mypage/&quot;</span> <span class="cp">%}</span>
+</pre></div>
+</div>
+<p>If you want the first page to contain a different number of items than
+subsequent pages, you can separate the two values with a comma, e.g. if
+you want 3 items on the first page and 10 on other pages:</p>
+<div class="highlight-html+django"><div class="highlight"><pre><span></span><span class="cp">{%</span> <span class="k">paginate</span> <span class="m">3</span><span class="o">,</span><span class="m">10</span> <span class="nv">entries</span> <span class="cp">%}</span>
+</pre></div>
+</div>
+<p>You must use this tag before calling the <a class="reference internal" href="#show-more">show_more</a>, <a class="reference internal" href="#get-pages">get_pages</a> or
+<a class="reference internal" href="#show-pages">show_pages</a> ones.</p>
+</div>
+<div class="section" id="lazy-paginate">
+<span id="templatetags-lazy-paginate"></span><h2>lazy_paginate<a class="headerlink" href="#lazy-paginate" title="Permalink to this headline">¶</a></h2>
+<p>Paginate objects without hitting the database with a <em>select count</em> query.
+Usually pagination requires hitting the database to get the total number of
+items to display. Lazy pagination avoids this <em>select count</em> query and results
+in a faster page load, with a disadvantage: you won&#8217;t know the total number of
+pages in advance.</p>
+<p>Use this in the same way as <a class="reference internal" href="#paginate">paginate</a> tag when you are not interested in the
+total number of pages.</p>
+<p>The <tt class="docutils literal"><span class="pre">lazy_paginate</span></tt> tag can take all the args of the <tt class="docutils literal"><span class="pre">paginate</span></tt> one, with
+one exception: negative indexes can not be passed to the <tt class="docutils literal"><span class="pre">starting</span> <span class="pre">from</span> <span class="pre">page</span></tt>
+argument.</p>
+</div>
+<div class="section" id="show-more">
+<span id="templatetags-show-more"></span><h2>show_more<a class="headerlink" href="#show-more" title="Permalink to this headline">¶</a></h2>
+<p>Show the link to get the next page in a <a class="reference internal" href="twitter_pagination.html"><em>Twitter-style Pagination</em></a>. Usage:</p>
+<div class="highlight-html+django"><div class="highlight"><pre><span></span><span class="cp">{%</span> <span class="k">show_more</span> <span class="cp">%}</span>
+</pre></div>
+</div>
+<p>Alternatively you can override the label passed to the default template:</p>
+<div class="highlight-html+django"><div class="highlight"><pre><span></span><span class="cp">{%</span> <span class="k">show_more</span> <span class="s2">&quot;even more&quot;</span> <span class="cp">%}</span>
+</pre></div>
+</div>
+<p>You can override the loading text too:</p>
+<div class="highlight-html+django"><div class="highlight"><pre><span></span><span class="cp">{%</span> <span class="k">show_more</span> <span class="s2">&quot;even more&quot;</span> <span class="s2">&quot;working&quot;</span> <span class="cp">%}</span>
+</pre></div>
+</div>
+<p>Must be called after <a class="reference internal" href="#paginate">paginate</a> or <a class="reference internal" href="#lazy-paginate">lazy_paginate</a>.</p>
+</div>
+<div class="section" id="get-pages">
+<span id="templatetags-get-pages"></span><h2>get_pages<a class="headerlink" href="#get-pages" title="Permalink to this headline">¶</a></h2>
+<p>Usage:</p>
+<div class="highlight-html+django"><div class="highlight"><pre><span></span><span class="cp">{%</span> <span class="k">get_pages</span> <span class="cp">%}</span>
+</pre></div>
+</div>
+<p>This is mostly used for <a class="reference internal" href="digg_pagination.html"><em>Digg-style pagination</em></a>.</p>
+<p>This call inserts in the template context a <em>pages</em> variable, as a sequence
+of page links. You can use <em>pages</em> in different ways:</p>
+<ul class="simple">
+<li>just print <em>pages</em> and you will get Digg-style pagination displayed:</li>
+</ul>
+<div class="highlight-html+django"><div class="highlight"><pre><span></span><span class="cp">{{</span> <span class="nv">pages</span> <span class="cp">}}</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li>display pages count:</li>
+</ul>
+<div class="highlight-html+django"><div class="highlight"><pre><span></span><span class="cp">{{</span> <span class="nv">pages</span><span class="o">|</span><span class="nf">length</span> <span class="cp">}}</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li>check if the page list contains more than one page:</li>
+</ul>
+<div class="highlight-html+django"><div class="highlight"><pre><span></span><span class="cp">{{</span> <span class="nv">pages.paginated</span> <span class="cp">}}</span>
+<span class="c">{# the following is equivalent #}</span>
+<span class="cp">{{</span> <span class="nv">pages</span><span class="o">|</span><span class="nf">length</span> <span class="o">&gt;</span> <span class="m">1</span> <span class="cp">}}</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li>get a specific page:</li>
+</ul>
+<div class="highlight-html+django"><div class="highlight"><pre><span></span><span class="c">{# the current selected page #}</span>
+<span class="cp">{{</span> <span class="nv">pages.current</span> <span class="cp">}}</span>
+
+<span class="c">{# the first page #}</span>
+<span class="cp">{{</span> <span class="nv">pages.first</span> <span class="cp">}}</span>
+
+<span class="c">{# the last page #}</span>
+<span class="cp">{{</span> <span class="nv">pages.last</span> <span class="cp">}}</span>
+
+<span class="c">{# the previous page (or nothing if you are on first page) #}</span>
+<span class="cp">{{</span> <span class="nv">pages.previous</span> <span class="cp">}}</span>
+
+<span class="c">{# the next page (or nothing if you are in last page) #}</span>
+<span class="cp">{{</span> <span class="nv">pages.next</span> <span class="cp">}}</span>
+
+<span class="c">{# the third page #}</span>
+<span class="cp">{{</span> <span class="nv">pages.3</span> <span class="cp">}}</span>
+<span class="c">{# this means page.1 is the same as page.first #}</span>
+
+<span class="c">{# the 1-based index of the first item on the current page #}</span>
+<span class="cp">{{</span> <span class="nv">pages.current_start_index</span> <span class="cp">}}</span>
+
+<span class="c">{# the 1-based index of the last item on the current page #}</span>
+<span class="cp">{{</span> <span class="nv">pages.current_end_index</span> <span class="cp">}}</span>
+
+<span class="c">{# the total number of objects, across all pages #}</span>
+<span class="cp">{{</span> <span class="nv">pages.total_count</span> <span class="cp">}}</span>
+
+<span class="c">{# the first page represented as an arrow #}</span>
+<span class="cp">{{</span> <span class="nv">pages.first_as_arrow</span> <span class="cp">}}</span>
+
+<span class="c">{# the last page represented as an arrow #}</span>
+<span class="cp">{{</span> <span class="nv">pages.last_as_arrow</span> <span class="cp">}}</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li>iterate over <em>pages</em> to get all pages:</li>
+</ul>
+<div class="highlight-html+django"><div class="highlight"><pre><span></span><span class="cp">{%</span> <span class="k">for</span> <span class="nv">page</span> <span class="k">in</span> <span class="nv">pages</span> <span class="cp">%}</span>
+    <span class="c">{# display page link #}</span>
+    <span class="cp">{{</span> <span class="nv">page</span> <span class="cp">}}</span>
+
+    <span class="c">{# the page url (beginning with &quot;?&quot;) #}</span>
+    <span class="cp">{{</span> <span class="nv">page.url</span> <span class="cp">}}</span>
+
+    <span class="c">{# the page path #}</span>
+    <span class="cp">{{</span> <span class="nv">page.path</span> <span class="cp">}}</span>
+
+    <span class="c">{# the page number #}</span>
+    <span class="cp">{{</span> <span class="nv">page.number</span> <span class="cp">}}</span>
+
+    <span class="c">{# a string representing the page (commonly the page number) #}</span>
+    <span class="cp">{{</span> <span class="nv">page.label</span> <span class="cp">}}</span>
+
+    <span class="c">{# check if the page is the current one #}</span>
+    <span class="cp">{{</span> <span class="nv">page.is_current</span> <span class="cp">}}</span>
+
+    <span class="c">{# check if the page is the first one #}</span>
+    <span class="cp">{{</span> <span class="nv">page.is_first</span> <span class="cp">}}</span>
+
+    <span class="c">{# check if the page is the last one #}</span>
+    <span class="cp">{{</span> <span class="nv">page.is_last</span> <span class="cp">}}</span>
+<span class="cp">{%</span> <span class="k">endfor</span> <span class="cp">%}</span>
+</pre></div>
+</div>
+<p>You can change the variable name, e.g.:</p>
+<div class="highlight-html+django"><div class="highlight"><pre><span></span><span class="cp">{%</span> <span class="k">get_pages</span> <span class="k">as</span> <span class="nv">page_links</span> <span class="cp">%}</span>
+</pre></div>
+</div>
+<p>This must be called after <a class="reference internal" href="#paginate">paginate</a> or <a class="reference internal" href="#lazy-paginate">lazy_paginate</a>.</p>
+</div>
+<div class="section" id="show-pages">
+<span id="templatetags-show-pages"></span><h2>show_pages<a class="headerlink" href="#show-pages" title="Permalink to this headline">¶</a></h2>
+<p>Show page links. Usage:</p>
+<div class="highlight-html+django"><div class="highlight"><pre><span></span><span class="cp">{%</span> <span class="k">show_pages</span> <span class="cp">%}</span>
+</pre></div>
+</div>
+<p>It is just a shortcut for:</p>
+<div class="highlight-html+django"><div class="highlight"><pre><span></span><span class="cp">{%</span> <span class="k">get_pages</span> <span class="cp">%}</span>
+<span class="cp">{{</span> <span class="nv">pages</span> <span class="cp">}}</span>
+</pre></div>
+</div>
+<p>You can set <tt class="docutils literal"><span class="pre">ENDLESS_PAGINATION_PAGE_LIST_CALLABLE</span></tt> in your <em>settings.py</em> to
+a callable used to customize the pages that are displayed.
+<tt class="docutils literal"><span class="pre">ENDLESS_PAGINATION_PAGE_LIST_CALLABLE</span></tt> can also be a dotted path
+representing a callable, e.g.:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">ENDLESS_PAGINATION_PAGE_LIST_CALLABLE</span> <span class="o">=</span> <span class="s1">&#39;path.to.callable&#39;</span>
+</pre></div>
+</div>
+<p>The callable takes the current page number and the total number of pages,
+and must return a sequence of page numbers that will be displayed.</p>
+<p>The sequence can contain other values:</p>
+<ul class="simple">
+<li><em>&#8216;previous&#8217;</em>: will display the previous page in that position;</li>
+<li><em>&#8216;next&#8217;</em>: will display the next page in that position;</li>
+<li><em>&#8216;first&#8217;</em>: will display the first page as an arrow;</li>
+<li><em>&#8216;last&#8217;</em>: will display the last page as an arrow;</li>
+<li><em>None</em>: a separator will be displayed in that position.</li>
+</ul>
+<p>Here is an example of a custom callable that displays the previous page, then
+the first page, then a separator, then the current page, and finally the last
+page:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">get_page_numbers</span><span class="p">(</span><span class="n">current_page</span><span class="p">,</span> <span class="n">num_pages</span><span class="p">):</span>
+    <span class="k">return</span> <span class="p">(</span><span class="s1">&#39;previous&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="n">current_page</span><span class="p">,</span> <span class="s1">&#39;last&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>If <tt class="docutils literal"><span class="pre">ENDLESS_PAGINATION_PAGE_LIST_CALLABLE</span></tt> is <em>None</em> the internal callable
+<tt class="docutils literal"><span class="pre">endless_pagination.utils.get_page_numbers</span></tt> is used, generating a Digg-style
+pagination.</p>
+<p>An alternative implementation is available:
+<tt class="docutils literal"><span class="pre">endless_pagination.utils.get_elastic_page_numbers</span></tt>: it adapts its output
+to the number of pages, making it arguably more usable when there are many
+of them.</p>
+<p>This must be called after <a class="reference internal" href="#paginate">paginate</a> or <a class="reference internal" href="#lazy-paginate">lazy_paginate</a>.</p>
+</div>
+<div class="section" id="show-current-number">
+<span id="templatetags-show-current-number"></span><h2>show_current_number<a class="headerlink" href="#show-current-number" title="Permalink to this headline">¶</a></h2>
+<p>Show the current page number, or insert it in the context.</p>
+<p>This tag can for example be useful to change the page title according to
+the current page number.</p>
+<p>To just show current page number:</p>
+<div class="highlight-html+django"><div class="highlight"><pre><span></span><span class="cp">{%</span> <span class="k">show_current_number</span> <span class="cp">%}</span>
+</pre></div>
+</div>
+<p>If you use multiple paginations in the same page, you can get the page
+number for a specific pagination using the querystring key, e.g.:</p>
+<div class="highlight-html+django"><div class="highlight"><pre><span></span><span class="cp">{%</span> <span class="k">show_current_number</span> <span class="nv">using</span> <span class="nv">mykey</span> <span class="cp">%}</span>
+</pre></div>
+</div>
+<p>The default page when no querystring is specified is 1. If you changed it
+in the <a class="reference internal" href="#paginate">paginate</a> template tag, you have to call  <tt class="docutils literal"><span class="pre">show_current_number</span></tt>
+according to your choice, e.g.:</p>
+<div class="highlight-html+django"><div class="highlight"><pre><span></span><span class="cp">{%</span> <span class="k">show_current_number</span> <span class="nv">starting</span> <span class="nv">from</span> <span class="nv">page</span> <span class="m">3</span> <span class="cp">%}</span>
+</pre></div>
+</div>
+<p>This can be also achieved using a template variable you passed to the
+context, e.g.:</p>
+<div class="highlight-html+django"><div class="highlight"><pre><span></span><span class="cp">{%</span> <span class="k">show_current_number</span> <span class="nv">starting</span> <span class="nv">from</span> <span class="nv">page</span> <span class="nv">page_number</span> <span class="cp">%}</span>
+</pre></div>
+</div>
+<p>You can of course mix it all (the order of arguments is important):</p>
+<div class="highlight-html+django"><div class="highlight"><pre><span></span><span class="cp">{%</span> <span class="k">show_current_number</span> <span class="nv">starting</span> <span class="nv">from</span> <span class="nv">page</span> <span class="m">3</span> <span class="nv">using</span> <span class="nv">mykey</span> <span class="cp">%}</span>
+</pre></div>
+</div>
+<p>If you want to insert the current page number in the context, without
+actually displaying it in the template, use the <em>as</em> argument, i.e.:</p>
+<div class="highlight-html+django"><div class="highlight"><pre><span></span><span class="cp">{%</span> <span class="k">show_current_number</span> <span class="k">as</span> <span class="nv">page_number</span> <span class="cp">%}</span>
+<span class="cp">{%</span> <span class="k">show_current_number</span> <span class="nv">starting</span> <span class="nv">from</span> <span class="nv">page</span> <span class="m">3</span> <span class="nv">using</span> <span class="nv">mykey</span> <span class="k">as</span> <span class="nv">page_number</span> <span class="cp">%}</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Templatetags reference</a><ul>
+<li><a class="reference internal" href="#paginate">paginate</a></li>
+<li><a class="reference internal" href="#lazy-paginate">lazy_paginate</a></li>
+<li><a class="reference internal" href="#show-more">show_more</a></li>
+<li><a class="reference internal" href="#get-pages">get_pages</a></li>
+<li><a class="reference internal" href="#show-pages">show_pages</a></li>
+<li><a class="reference internal" href="#show-current-number">show_current_number</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="current_page_number.html"
+                        title="previous chapter">Getting the current page number</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="javascript.html"
+                        title="next chapter">JavaScript reference</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/templatetags_reference.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="javascript.html" title="JavaScript reference"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="current_page_number.html" title="Getting the current page number"
+             >previous</a> |</li>
+        <li><a href="index.html">Django Endless Pagination Vue 1.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2009-2017, Francesco Banconi and Martin Peveri.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

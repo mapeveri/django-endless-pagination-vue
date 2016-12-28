@@ -1,0 +1,199 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Django Endless Pagination Vue &mdash; Django Endless Pagination Vue 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="Django Endless Pagination Vue 1.0 documentation" href="#" />
+    <link rel="next" title="Changelog" href="changelog.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="changelog.html" title="Changelog"
+             accesskey="N">next</a> |</li>
+        <li><a href="#">Django Endless Pagination Vue 1.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="django-endless-pagination-vue">
+<h1>Django Endless Pagination Vue<a class="headerlink" href="#django-endless-pagination-vue" title="Permalink to this headline">¶</a></h1>
+<p>Django Endless Pagination Vue is a fork of the excellent application django-endless-pagination created for Francesco Banconi.
+This application get all code of version 2.0 and update for working in django &gt;= 1.7 in addition to migrate code jquery to vue.js.</p>
+<p>This application provides Twitter- and Digg-style pagination, with multiple
+and lazy pagination and optional Ajax support. It is devoted to implementing
+web pagination in very few steps.</p>
+<p>The <strong>source code</strong> for this app is hosted at
+<a class="reference external" href="https://github.com/mapeveri/django-endless-pagination-vue">https://github.com/mapeveri/django-endless-pagination-vue</a>.</p>
+<p><a class="reference internal" href="start.html"><em>Getting started</em></a> is easy!</p>
+<p>Contents:</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="changelog.html">Changelog</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="changelog.html#version-1-0">Version 1.0</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="start.html">Getting started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="start.html#requirements">Requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="start.html#installation">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="start.html#settings">Settings</a></li>
+<li class="toctree-l2"><a class="reference internal" href="start.html#quickstart">Quickstart</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="twitter_pagination.html">Twitter-style Pagination</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="twitter_pagination.html#split-the-template">Split the template</a></li>
+<li class="toctree-l2"><a class="reference internal" href="twitter_pagination.html#a-shortcut-for-ajaxed-views">A shortcut for ajaxed views</a></li>
+<li class="toctree-l2"><a class="reference internal" href="twitter_pagination.html#paginating-objects">Paginating objects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="twitter_pagination.html#pagination-on-scroll">Pagination on scroll</a></li>
+<li class="toctree-l2"><a class="reference internal" href="twitter_pagination.html#on-scroll-pagination-using-chunks">On scroll pagination using chunks</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="digg_pagination.html">Digg-style pagination</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="digg_pagination.html#page-by-page">Page by page</a></li>
+<li class="toctree-l2"><a class="reference internal" href="digg_pagination.html#showing-indexes">Showing indexes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="digg_pagination.html#number-of-pages">Number of pages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="digg_pagination.html#adding-ajax">Adding Ajax</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="multiple_pagination.html">Multiple paginations in the same page</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="multiple_pagination.html#adding-ajax-for-multiple-pagination">Adding Ajax for multiple pagination</a></li>
+<li class="toctree-l2"><a class="reference internal" href="multiple_pagination.html#manually-selecting-what-to-bind">Manually selecting what to bind</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="lazy_pagination.html">Lazy pagination</a></li>
+<li class="toctree-l1"><a class="reference internal" href="different_first_page.html">Different number of items on the first page</a></li>
+<li class="toctree-l1"><a class="reference internal" href="current_page_number.html">Getting the current page number</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="current_page_number.html#in-the-template">In the template</a></li>
+<li class="toctree-l2"><a class="reference internal" href="current_page_number.html#in-the-view">In the view</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="templatetags_reference.html">Templatetags reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="templatetags_reference.html#paginate">paginate</a></li>
+<li class="toctree-l2"><a class="reference internal" href="templatetags_reference.html#lazy-paginate">lazy_paginate</a></li>
+<li class="toctree-l2"><a class="reference internal" href="templatetags_reference.html#show-more">show_more</a></li>
+<li class="toctree-l2"><a class="reference internal" href="templatetags_reference.html#get-pages">get_pages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="templatetags_reference.html#show-pages">show_pages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="templatetags_reference.html#show-current-number">show_current_number</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="javascript.html">JavaScript reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="javascript.html#activating-ajax-support">Activating Ajax support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="javascript.html#pagination-on-scroll">Pagination on scroll</a></li>
+<li class="toctree-l2"><a class="reference internal" href="javascript.html#attaching-callbacks">Attaching callbacks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="javascript.html#manually-selecting-what-to-bind">Manually selecting what to bind</a></li>
+<li class="toctree-l2"><a class="reference internal" href="javascript.html#selectors">Selectors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="javascript.html#on-scroll-pagination-using-chunks">On scroll pagination using chunks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="javascript.html#migrate-from-django-endless-pagination-to-django-endless-pagination-vue">Migrate from Django-endless-pagination to django-endless-pagination-vue</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="generic_views.html">Generic views</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="generic_views.html#module-endless_pagination.views">AjaxListView reference</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="customization.html">Customization</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="customization.html#settings">Settings</a></li>
+<li class="toctree-l2"><a class="reference internal" href="customization.html#templates-and-css">Templates and CSS</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="contributing.html">Contributing</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="contributing.html#creating-a-development-environment">Creating a development environment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="contributing.html#testing-the-application">Testing the application</a></li>
+<li class="toctree-l2"><a class="reference internal" href="contributing.html#debugging">Debugging</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="contacts.html">Source code and contacts</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="contacts.html#repository-and-bugs">Repository and bugs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="contacts.html#contacts">Contacts</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="thanks.html">Thanks</a></li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h4>Next topic</h4>
+  <p class="topless"><a href="changelog.html"
+                        title="next chapter">Changelog</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/index.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="changelog.html" title="Changelog"
+             >next</a> |</li>
+        <li><a href="#">Django Endless Pagination Vue 1.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2009-2017, Francesco Banconi and Martin Peveri.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

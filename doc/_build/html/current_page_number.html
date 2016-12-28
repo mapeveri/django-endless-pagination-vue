@@ -1,0 +1,164 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Getting the current page number &mdash; Django Endless Pagination Vue 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="Django Endless Pagination Vue 1.0 documentation" href="index.html" />
+    <link rel="next" title="Templatetags reference" href="templatetags_reference.html" />
+    <link rel="prev" title="Different number of items on the first page" href="different_first_page.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="templatetags_reference.html" title="Templatetags reference"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="different_first_page.html" title="Different number of items on the first page"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">Django Endless Pagination Vue 1.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="getting-the-current-page-number">
+<h1>Getting the current page number<a class="headerlink" href="#getting-the-current-page-number" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="in-the-template">
+<h2>In the template<a class="headerlink" href="#in-the-template" title="Permalink to this headline">¶</a></h2>
+<p>You can get and display the current page number in the template using
+the <a class="reference internal" href="templatetags_reference.html#templatetags-show-current-number"><em>show_current_number</em></a> template tag, e.g.:</p>
+<div class="highlight-html+django"><div class="highlight"><pre><span></span><span class="cp">{%</span> <span class="k">show_current_number</span> <span class="cp">%}</span>
+</pre></div>
+</div>
+<p>This call will display the current page number, but you can also
+insert the value in the context as a template variable:</p>
+<div class="highlight-html+django"><div class="highlight"><pre><span></span><span class="cp">{%</span> <span class="k">show_current_number</span> <span class="k">as</span> <span class="nv">page_number</span> <span class="cp">%}</span>
+<span class="cp">{{</span> <span class="nv">page_number</span> <span class="cp">}}</span>
+</pre></div>
+</div>
+<p>See the <a class="reference internal" href="templatetags_reference.html#templatetags-show-current-number"><em>show_current_number</em></a> refrence for more information
+on accepted arguments.</p>
+</div>
+<div class="section" id="in-the-view">
+<h2>In the view<a class="headerlink" href="#in-the-view" title="Permalink to this headline">¶</a></h2>
+<p>If you need to get the current page number in the view, you can use an utility
+function called <tt class="docutils literal"><span class="pre">get_page_number_from_request</span></tt>, e.g.:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">endless_pagination</span> <span class="kn">import</span> <span class="n">utils</span>
+
+<span class="n">page</span> <span class="o">=</span> <span class="n">utils</span><span class="o">.</span><span class="n">get_page_number_from_request</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>If you are using <a class="reference internal" href="multiple_pagination.html"><em>multiple pagination</em></a>, or you have
+changed the default querystring for pagination, you can pass the querystring
+key as an optional argument:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">page</span> <span class="o">=</span> <span class="n">utils</span><span class="o">.</span><span class="n">get_page_number_from_request</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">querystring_key</span><span class="o">=</span><span class="n">mykey</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>If the page number is not present in the request, by default <em>1</em> is returned.
+You can change this behaviour using:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">page</span> <span class="o">=</span> <span class="n">utils</span><span class="o">.</span><span class="n">get_page_number_from_request</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Getting the current page number</a><ul>
+<li><a class="reference internal" href="#in-the-template">In the template</a></li>
+<li><a class="reference internal" href="#in-the-view">In the view</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="different_first_page.html"
+                        title="previous chapter">Different number of items on the first page</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="templatetags_reference.html"
+                        title="next chapter">Templatetags reference</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/current_page_number.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="templatetags_reference.html" title="Templatetags reference"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="different_first_page.html" title="Different number of items on the first page"
+             >previous</a> |</li>
+        <li><a href="index.html">Django Endless Pagination Vue 1.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2009-2017, Francesco Banconi and Martin Peveri.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

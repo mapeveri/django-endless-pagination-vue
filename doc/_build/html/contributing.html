@@ -1,0 +1,182 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Contributing &mdash; Django Endless Pagination Vue 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="Django Endless Pagination Vue 1.0 documentation" href="index.html" />
+    <link rel="next" title="Source code and contacts" href="contacts.html" />
+    <link rel="prev" title="Customization" href="customization.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="contacts.html" title="Source code and contacts"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="customization.html" title="Customization"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">Django Endless Pagination Vue 1.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="contributing">
+<h1>Contributing<a class="headerlink" href="#contributing" title="Permalink to this headline">¶</a></h1>
+<p>Here are the steps needed to set up a development and testing environment.</p>
+<div class="section" id="creating-a-development-environment">
+<h2>Creating a development environment<a class="headerlink" href="#creating-a-development-environment" title="Permalink to this headline">¶</a></h2>
+<p>The development environment is created in a virtualenv. The environment
+creation requires the <em>make</em> and <em>virtualenv</em> programs to be installed.</p>
+<p>To install <em>make</em> under Debian/Ubuntu:</p>
+<div class="highlight-python"><pre>$ sudo apt-get install build-essential</pre>
+</div>
+<p>Under Mac OS/X, <em>make</em> is available as part of XCode.</p>
+<p>To install virtualenv:</p>
+<div class="highlight-python"><pre>$ sudo pip install virtualenv</pre>
+</div>
+<p>At this point, from the root of this branch, run the command:</p>
+<div class="highlight-python"><pre>$ make</pre>
+</div>
+<p>This command will create a <tt class="docutils literal"><span class="pre">.venv</span></tt> directory in the branch root, ignored
+by DVCSes, containing the development virtual environment with all the
+dependencies.</p>
+</div>
+<div class="section" id="testing-the-application">
+<h2>Testing the application<a class="headerlink" href="#testing-the-application" title="Permalink to this headline">¶</a></h2>
+<p>Run the tests:</p>
+<div class="highlight-python"><pre>$ make test</pre>
+</div>
+<p>The command above also runs all the available integration tests. They use
+Selenium and require Firefox to be installed. To avoid executing integration
+tests, define the environment variable SKIP_SELENIUM, e.g.:</p>
+<div class="highlight-python"><pre>$ make test SKIP_SELENIUM=1</pre>
+</div>
+<p>Integration tests are excluded by default when using Python 3. The test suite
+requires Python &gt;= 2.6.1.</p>
+<p>Run the tests and lint/pep8 checks:</p>
+<div class="highlight-python"><pre>$ make check</pre>
+</div>
+<p>Again, to exclude integration tests:</p>
+<div class="highlight-python"><pre>$ make check SKIP_SELENIUM=1</pre>
+</div>
+</div>
+<div class="section" id="debugging">
+<h2>Debugging<a class="headerlink" href="#debugging" title="Permalink to this headline">¶</a></h2>
+<p>Run the Django shell (Python interpreter):</p>
+<div class="highlight-python"><pre>$ make shell</pre>
+</div>
+<p>Run the Django development server for manual testing:</p>
+<div class="highlight-python"><pre>$ make server</pre>
+</div>
+<p>After executing the command above, it is possible to navigate the testing
+project going to &lt;<a class="reference external" href="http://localhost:8000">http://localhost:8000</a>&gt;.</p>
+<p>See all the available make targets, including info on how to create a Python 3
+development environment:</p>
+<div class="highlight-python"><pre>$ make help</pre>
+</div>
+<p>Thanks for contributing, and have fun!</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Contributing</a><ul>
+<li><a class="reference internal" href="#creating-a-development-environment">Creating a development environment</a></li>
+<li><a class="reference internal" href="#testing-the-application">Testing the application</a></li>
+<li><a class="reference internal" href="#debugging">Debugging</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="customization.html"
+                        title="previous chapter">Customization</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="contacts.html"
+                        title="next chapter">Source code and contacts</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/contributing.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="contacts.html" title="Source code and contacts"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="customization.html" title="Customization"
+             >previous</a> |</li>
+        <li><a href="index.html">Django Endless Pagination Vue 1.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2009-2017, Francesco Banconi and Martin Peveri.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

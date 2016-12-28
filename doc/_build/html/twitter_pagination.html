@@ -1,0 +1,338 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Twitter-style Pagination &mdash; Django Endless Pagination Vue 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="Django Endless Pagination Vue 1.0 documentation" href="index.html" />
+    <link rel="next" title="Digg-style pagination" href="digg_pagination.html" />
+    <link rel="prev" title="Getting started" href="start.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="digg_pagination.html" title="Digg-style pagination"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="start.html" title="Getting started"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">Django Endless Pagination Vue 1.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="twitter-style-pagination">
+<h1>Twitter-style Pagination<a class="headerlink" href="#twitter-style-pagination" title="Permalink to this headline">¶</a></h1>
+<p>Assuming the developer wants Twitter-style pagination of
+entries of a blog post, in <em>views.py</em> we have:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">entry_index</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">template</span><span class="o">=</span><span class="s1">&#39;myapp/entry_index.html&#39;</span><span class="p">):</span>
+    <span class="n">context</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;entries&#39;</span><span class="p">:</span> <span class="n">Entry</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">all</span><span class="p">(),</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="n">render_to_response</span><span class="p">(</span>
+        <span class="n">template</span><span class="p">,</span> <span class="n">context</span><span class="p">,</span> <span class="n">context_instance</span><span class="o">=</span><span class="n">RequestContext</span><span class="p">(</span><span class="n">request</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>In <em>myapp/entry_index.html</em>:</p>
+<div class="highlight-html+django"><div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">h2</span><span class="p">&gt;</span>Entries:<span class="p">&lt;/</span><span class="nt">h2</span><span class="p">&gt;</span>
+<span class="cp">{%</span> <span class="k">for</span> <span class="nv">entry</span> <span class="k">in</span> <span class="nv">entries</span> <span class="cp">%}</span>
+    <span class="c">{# your code to show the entry #}</span>
+<span class="cp">{%</span> <span class="k">endfor</span> <span class="cp">%}</span>
+</pre></div>
+</div>
+<div class="section" id="split-the-template">
+<span id="twitter-split-template"></span><h2>Split the template<a class="headerlink" href="#split-the-template" title="Permalink to this headline">¶</a></h2>
+<p>The response to an Ajax request should not return the entire template,
+but only the portion of the page to be updated or added.
+So it is convenient to extract from the template the part containing the
+entries, and use it to render the context if the request is Ajax.
+The main template will include the extracted part, so it is convenient
+to put the page template name in the context.</p>
+<p><em>views.py</em> becomes:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">entry_index</span><span class="p">(</span>
+        <span class="n">request</span><span class="p">,</span>
+        <span class="n">template</span><span class="o">=</span><span class="s1">&#39;myapp/entry_index.html&#39;</span><span class="p">,</span>
+        <span class="n">page_template</span><span class="o">=</span><span class="s1">&#39;myapp/entry_index_page.html&#39;</span><span class="p">):</span>
+    <span class="n">context</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;entries&#39;</span><span class="p">:</span> <span class="n">Entry</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">all</span><span class="p">(),</span>
+        <span class="s1">&#39;page_template&#39;</span><span class="p">:</span> <span class="n">page_template</span><span class="p">,</span>
+    <span class="p">}</span>
+    <span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">is_ajax</span><span class="p">():</span>
+        <span class="n">template</span> <span class="o">=</span> <span class="n">page_template</span>
+    <span class="k">return</span> <span class="n">render_to_response</span><span class="p">(</span>
+        <span class="n">template</span><span class="p">,</span> <span class="n">context</span><span class="p">,</span> <span class="n">context_instance</span><span class="o">=</span><span class="n">RequestContext</span><span class="p">(</span><span class="n">request</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>See <a class="reference internal" href="#twitter-page-template"><em>below</em></a> how to obtain the same result
+<strong>just decorating the view</strong> (in a way compatible with generic views too).</p>
+<p><em>myapp/entry_index.html</em> becomes:</p>
+<div class="highlight-html+django"><div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">h2</span><span class="p">&gt;</span>Entries:<span class="p">&lt;/</span><span class="nt">h2</span><span class="p">&gt;</span>
+<span class="cp">{%</span> <span class="k">include</span> <span class="nv">page_template</span> <span class="cp">%}</span>
+</pre></div>
+</div>
+<p><em>myapp/entry_index_page.html</em> becomes:</p>
+<div class="highlight-html+django"><div class="highlight"><pre><span></span><span class="cp">{%</span> <span class="k">for</span> <span class="nv">entry</span> <span class="k">in</span> <span class="nv">entries</span> <span class="cp">%}</span>
+    <span class="c">{# your code to show the entry #}</span>
+<span class="cp">{%</span> <span class="k">endfor</span> <span class="cp">%}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="a-shortcut-for-ajaxed-views">
+<span id="twitter-page-template"></span><h2>A shortcut for ajaxed views<a class="headerlink" href="#a-shortcut-for-ajaxed-views" title="Permalink to this headline">¶</a></h2>
+<p>A good practice in writing views is to allow other developers to inject
+the template name and extra data, so that they are added to the context.
+This allows the view to be easily reused. Let&#8217;s resume the original view
+with extra context injection:</p>
+<p><em>views.py</em>:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">entry_index</span><span class="p">(</span>
+        <span class="n">request</span><span class="p">,</span> <span class="n">template</span><span class="o">=</span><span class="s1">&#39;myapp/entry_index.html&#39;</span><span class="p">,</span> <span class="n">extra_context</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+    <span class="n">context</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;entries&#39;</span><span class="p">:</span> <span class="n">Entry</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">all</span><span class="p">(),</span>
+    <span class="p">}</span>
+    <span class="k">if</span> <span class="n">extra_context</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="n">context</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">extra_context</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">render_to_response</span><span class="p">(</span>
+        <span class="n">template</span><span class="p">,</span> <span class="n">context</span><span class="p">,</span> <span class="n">context_instance</span><span class="o">=</span><span class="n">RequestContext</span><span class="p">(</span><span class="n">request</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>Splitting templates and putting the Ajax template name in the context
+is easily achievable by using an included decorator.</p>
+<p><em>views.py</em> becomes:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">endless_pagination.decorators</span> <span class="kn">import</span> <span class="n">page_template</span>
+
+<span class="nd">@page_template</span><span class="p">(</span><span class="s1">&#39;myapp/entry_index_page.html&#39;</span><span class="p">)</span>  <span class="c1"># just add this decorator</span>
+<span class="k">def</span> <span class="nf">entry_index</span><span class="p">(</span>
+        <span class="n">request</span><span class="p">,</span> <span class="n">template</span><span class="o">=</span><span class="s1">&#39;myapp/entry_index.html&#39;</span><span class="p">,</span> <span class="n">extra_context</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+    <span class="n">context</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;entries&#39;</span><span class="p">:</span> <span class="n">Entry</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">all</span><span class="p">(),</span>
+    <span class="p">}</span>
+    <span class="k">if</span> <span class="n">extra_context</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="n">context</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">extra_context</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">render_to_response</span><span class="p">(</span>
+        <span class="n">template</span><span class="p">,</span> <span class="n">context</span><span class="p">,</span> <span class="n">context_instance</span><span class="o">=</span><span class="n">RequestContext</span><span class="p">(</span><span class="n">request</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>This way, <em>endless-pagination</em> can be included in <strong>generic views</strong> too.</p>
+<p>See <a class="reference internal" href="generic_views.html"><em>Generic views</em></a> if you use Django &gt;= 1.3 and you want to replicate
+the same behavior using a class-based generic view.</p>
+</div>
+<div class="section" id="paginating-objects">
+<h2>Paginating objects<a class="headerlink" href="#paginating-objects" title="Permalink to this headline">¶</a></h2>
+<p>All that&#8217;s left is changing the page template and loading the
+<a class="reference internal" href="templatetags_reference.html"><em>endless templatetags</em></a>, the jQuery library and the
+jQuery plugin <tt class="docutils literal"><span class="pre">endless-pagination.js</span></tt> included in the distribution under
+<tt class="docutils literal"><span class="pre">/static/endless_pagination/js/</span></tt>.</p>
+<p><em>myapp/entry_index.html</em> becomes:</p>
+<div class="highlight-html+django"><pre>&lt;body&gt;
+    &lt;h2&gt;Entries:&lt;/h2&gt;
+    &lt;div id=&quot;entries v-endles-pagination&gt;
+        {% include page_template %}
+    &lt;/div&gt;
+
+    {% block js %}
+        &lt;script src=&quot;https://unpkg.com/vue/dist/vue.min.js&quot;&gt;&lt;/script&gt;
+        &lt;script src=&quot;{% static &#x27;endless_pagination/js/module.endless.js&#x27; %}&quot;&gt;&lt;/script&gt;
+
+        new Vue({
+            el: &#x27;#entries&#x27;,
+        });
+    {% endblock %}
+&lt;/body&gt;</pre>
+</div>
+<p><em>myapp/entry_index_page.html</em> becomes:</p>
+<div class="highlight-html+django"><div class="highlight"><pre><span></span><span class="cp">{%</span> <span class="k">load</span> <span class="nv">endless</span> <span class="cp">%}</span>
+
+<span class="cp">{%</span> <span class="k">paginate</span> <span class="nv">entries</span> <span class="cp">%}</span>
+<span class="cp">{%</span> <span class="k">for</span> <span class="nv">entry</span> <span class="k">in</span> <span class="nv">entries</span> <span class="cp">%}</span>
+    <span class="c">{# your code to show the entry #}</span>
+<span class="cp">{%</span> <span class="k">endfor</span> <span class="cp">%}</span>
+<span class="cp">{%</span> <span class="k">show_more</span> <span class="cp">%}</span>
+</pre></div>
+</div>
+<p>The <a class="reference internal" href="templatetags_reference.html#templatetags-paginate"><em>paginate</em></a> template tag takes care of customizing the
+given queryset and the current template context. In the context of a
+Twitter-style pagination the <a class="reference internal" href="templatetags_reference.html#templatetags-paginate"><em>paginate</em></a> tag is often replaced
+by the <a class="reference internal" href="templatetags_reference.html#templatetags-lazy-paginate"><em>lazy_paginate</em></a> one, which offers, more or less, the
+same functionalities and allows for reducing database access: see
+<a class="reference internal" href="lazy_pagination.html"><em>Lazy pagination</em></a>.</p>
+<p>The <a class="reference internal" href="templatetags_reference.html#templatetags-show-more"><em>show_more</em></a> one displays the link to navigate to the next
+page.</p>
+<p>You might want to glance at the <a class="reference internal" href="javascript.html"><em>JavaScript reference</em></a> for a detailed explanation of
+how to integrate JavaScript and Ajax features in Django Endless Pagination Vue.</p>
+</div>
+<div class="section" id="pagination-on-scroll">
+<h2>Pagination on scroll<a class="headerlink" href="#pagination-on-scroll" title="Permalink to this headline">¶</a></h2>
+<p>If you want new items to load when the user scroll down the browser page,
+you can use the <a class="reference internal" href="javascript.html#javascript-pagination-on-scroll"><em>pagination on scroll</em></a>
+feature: just set the <em>paginateOnScroll</em> option of the directive <em>endless-pagination</em> to
+<em>true</em>, e.g.:</p>
+<div class="highlight-html+django"><pre>&lt;body&gt;
+    &lt;h2&gt;Entries:&lt;/h2&gt;
+    &lt;div id=&quot;entries&quot; v-endless-pagination=&quot;{&#x27;paginateOnScroll&#x27;: true}&quot;
+    {% include page_template %}
+    &lt;/div&gt;
+
+    {% block js %}
+        &lt;script src=&quot;https://unpkg.com/vue/dist/vue.min.js&quot;&gt;&lt;/script&gt;
+        &lt;script src=&quot;{% static &#x27;endless_pagination/js/module.endless.js&#x27; %}&quot;&gt;&lt;/script&gt;
+
+        new Vue({
+            el: &#x27;#entries&#x27;,
+        });
+    {% endblock %}
+&lt;/body&gt;</pre>
+</div>
+<p>That&#8217;s all. See the <a class="reference internal" href="templatetags_reference.html"><em>Templatetags reference</em></a> to improve the use of
+included templatetags.</p>
+<p>It is possible to set the bottom margin used for
+<a class="reference internal" href="javascript.html#javascript-pagination-on-scroll"><em>pagination on scroll</em></a> (default is 1
+pixel). For example, if you want the pagination on scroll to be activated when
+20 pixels remain to the end of the page:</p>
+<div class="highlight-html+django"><pre>&lt;body&gt;
+    &lt;h2&gt;Entries:&lt;/h2&gt;
+    &lt;div id=&quot;entries&quot; v-endless-pagination=&quot;{&#x27;paginateOnScroll&#x27;: true, &#x27;paginateOnScrollMargin&#x27;: 20}&quot;
+    {% include page_template %}
+    &lt;/div&gt;
+
+    {% block js %}
+        &lt;script src=&quot;https://unpkg.com/vue/dist/vue.min.js&quot;&gt;&lt;/script&gt;
+        &lt;script src=&quot;{% static &#x27;endless_pagination/js/module.endless.js&#x27; %}&quot;&gt;&lt;/script&gt;
+
+        new Vue({
+            el: &#x27;#entries&#x27;,
+        });
+    {% endblock %}
+&lt;/body&gt;</pre>
+</div>
+<p>Again, see the <a class="reference internal" href="javascript.html"><em>JavaScript reference</em></a>.</p>
+</div>
+<div class="section" id="on-scroll-pagination-using-chunks">
+<h2>On scroll pagination using chunks<a class="headerlink" href="#on-scroll-pagination-using-chunks" title="Permalink to this headline">¶</a></h2>
+<p>Sometimes, when using on scroll pagination, you may want to still display
+the <em>show more</em> link after each <em>N</em> pages. In Django Endless Pagination Vue this is
+called <em>chunk size</em>. For instance, a chunk size of 5 means that a <em>show more</em>
+link is displayed after page 5 is loaded, then after page 10, then after page
+15 and so on. Activating <a class="reference internal" href="javascript.html#javascript-chunks"><em>chunks</em></a> is straightforward,
+just use the <em>paginateOnScrollChunkSize</em> option:</p>
+<div class="highlight-html+django"><pre>&lt;body&gt;
+    &lt;h2&gt;Entries:&lt;/h2&gt;
+    &lt;div id=&quot;entries&quot; v-endless-pagination=&quot;{&#x27;paginateOnScroll&#x27;: true, &#x27;paginateOnScrollChunkSize&#x27;: 5}&quot;
+    {% include page_template %}
+    &lt;/div&gt;
+
+    {% block js %}
+        &lt;script src=&quot;https://unpkg.com/vue/dist/vue.min.js&quot;&gt;&lt;/script&gt;
+        &lt;script src=&quot;{% static &#x27;endless_pagination/js/module.endless.js&#x27; %}&quot;&gt;&lt;/script&gt;
+
+        new Vue({
+            el: &#x27;#entries&#x27;,
+        });
+    {% endblock %}
+&lt;/body&gt;</pre>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Twitter-style Pagination</a><ul>
+<li><a class="reference internal" href="#split-the-template">Split the template</a></li>
+<li><a class="reference internal" href="#a-shortcut-for-ajaxed-views">A shortcut for ajaxed views</a></li>
+<li><a class="reference internal" href="#paginating-objects">Paginating objects</a></li>
+<li><a class="reference internal" href="#pagination-on-scroll">Pagination on scroll</a></li>
+<li><a class="reference internal" href="#on-scroll-pagination-using-chunks">On scroll pagination using chunks</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="start.html"
+                        title="previous chapter">Getting started</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="digg_pagination.html"
+                        title="next chapter">Digg-style pagination</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/twitter_pagination.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="digg_pagination.html" title="Digg-style pagination"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="start.html" title="Getting started"
+             >previous</a> |</li>
+        <li><a href="index.html">Django Endless Pagination Vue 1.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2009-2017, Francesco Banconi and Martin Peveri.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

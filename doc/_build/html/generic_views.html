@@ -1,0 +1,213 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Generic views &mdash; Django Endless Pagination Vue 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="Django Endless Pagination Vue 1.0 documentation" href="index.html" />
+    <link rel="next" title="Customization" href="customization.html" />
+    <link rel="prev" title="JavaScript reference" href="javascript.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="customization.html" title="Customization"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="javascript.html" title="JavaScript reference"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">Django Endless Pagination Vue 1.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="generic-views">
+<h1>Generic views<a class="headerlink" href="#generic-views" title="Permalink to this headline">¶</a></h1>
+<p>Django 1.3 introduced class-based generic views
+(see <a class="reference external" href="https://docs.djangoproject.com/en/1.3/topics/class-based-views/">https://docs.djangoproject.com/en/1.3/topics/class-based-views/</a>).</p>
+<p>This application provides a customized class-based view, similar to
+<em>django.views.generic.ListView</em>, that allows Ajax pagination of a
+list of objects (usually a queryset).</p>
+<div class="section" id="module-endless_pagination.views">
+<span id="ajaxlistview-reference"></span><h2>AjaxListView reference<a class="headerlink" href="#module-endless_pagination.views" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="endless_pagination.views.AjaxListView">
+<em class="property">class </em><tt class="descclassname">endless_pagination.views.</tt><tt class="descname">AjaxListView</tt><big>(</big><em>django.views.generic.ListView</em><big>)</big><a class="headerlink" href="#endless_pagination.views.AjaxListView" title="Permalink to this definition">¶</a></dt>
+<dd><p>A class based view, similar to <em>django.views.generic.ListView</em>,
+that allows Ajax pagination of a list of objects.</p>
+<p>You can use this class based view in place of <em>ListView</em> in order to
+recreate the behaviour of the <em>page_template</em> decorator.</p>
+<p>For instance, assume you have this code (taken from Django docs):</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">django.conf.urls</span> <span class="kn">import</span> <span class="n">patterns</span>
+<span class="kn">from</span> <span class="nn">django.views.generic</span> <span class="kn">import</span> <span class="n">ListView</span>
+<span class="kn">from</span> <span class="nn">books.models</span> <span class="kn">import</span> <span class="n">Publisher</span>
+
+<span class="n">urlpatterns</span> <span class="o">=</span> <span class="n">patterns</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">,</span>
+    <span class="p">(</span><span class="s1">r&#39;^publishers/$&#39;</span><span class="p">,</span> <span class="n">ListView</span><span class="o">.</span><span class="n">as_view</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">Publisher</span><span class="p">)),</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>You want to Ajax paginate publishers, so, as seen, you need to switch
+the template if the request is Ajax and put the page template
+into the context as a variable named <em>page_template</em>.</p>
+<p>This is straightforward, you only need to replace the view class, e.g.:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">django.conf.urls</span> <span class="kn">import</span> <span class="n">patterns</span>
+<span class="kn">from</span> <span class="nn">books.models</span> <span class="kn">import</span> <span class="n">Publisher</span>
+
+<span class="kn">from</span> <span class="nn">endless_pagination.views</span> <span class="kn">import</span> <span class="n">AjaxListView</span>
+
+<span class="n">urlpatterns</span> <span class="o">=</span> <span class="n">patterns</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">,</span>
+    <span class="p">(</span><span class="s1">r&#39;^publishers/$&#39;</span><span class="p">,</span> <span class="n">AjaxListView</span><span class="o">.</span><span class="n">as_view</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">Publisher</span><span class="p">)),</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>NOTE: Django &gt;= 1.3 is required to use this view.</p>
+<dl class="attribute">
+<dt id="endless_pagination.views.AjaxListView.key">
+<tt class="descname">key</tt><a class="headerlink" href="#endless_pagination.views.AjaxListView.key" title="Permalink to this definition">¶</a></dt>
+<dd><p>the querystring key used for the current pagination
+(default: <em>settings.ENDLESS_PAGINATION_PAGE_LABEL</em>)</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="endless_pagination.views.AjaxListView.page_template">
+<tt class="descname">page_template</tt><a class="headerlink" href="#endless_pagination.views.AjaxListView.page_template" title="Permalink to this definition">¶</a></dt>
+<dd><p>the template used for the paginated objects</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="endless_pagination.views.AjaxListView.page_template_suffix">
+<tt class="descname">page_template_suffix</tt><a class="headerlink" href="#endless_pagination.views.AjaxListView.page_template_suffix" title="Permalink to this definition">¶</a></dt>
+<dd><p>the template suffix used for autogenerated page_template name
+(when not given, default=&#8217;_page&#8217;)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="endless_pagination.views.AjaxListView.get_context_data">
+<tt class="descname">get_context_data</tt><big>(</big><em>self</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#endless_pagination.views.AjaxListView.get_context_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Adds the <em>page_template</em> variable in the context.</p>
+<p>If the <em>page_template</em> is not given as a kwarg of the <em>as_view</em>
+method then it is invented using app label, model name
+(obviously if the list is a queryset), <em>self.template_name_suffix</em>
+and <em>self.page_template_suffix</em>.</p>
+<p>For instance, if the list is a queryset of <em>blog.Entry</em>,
+the template will be <em>blog/entry_list_page.html</em>.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="endless_pagination.views.AjaxListView.get_template_names">
+<tt class="descname">get_template_names</tt><big>(</big><em>self</em><big>)</big><a class="headerlink" href="#endless_pagination.views.AjaxListView.get_template_names" title="Permalink to this definition">¶</a></dt>
+<dd><p>Switch the templates for Ajax requests.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="endless_pagination.views.AjaxListView.get_page_template">
+<tt class="descname">get_page_template</tt><big>(</big><em>self</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#endless_pagination.views.AjaxListView.get_page_template" title="Permalink to this definition">¶</a></dt>
+<dd><p>Only called if <em>page_template</em> is not given as a kwarg of
+<em>self.as_view</em>.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Generic views</a><ul>
+<li><a class="reference internal" href="#module-endless_pagination.views">AjaxListView reference</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="javascript.html"
+                        title="previous chapter">JavaScript reference</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="customization.html"
+                        title="next chapter">Customization</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/generic_views.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="customization.html" title="Customization"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="javascript.html" title="JavaScript reference"
+             >previous</a> |</li>
+        <li><a href="index.html">Django Endless Pagination Vue 1.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2009-2017, Francesco Banconi and Martin Peveri.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

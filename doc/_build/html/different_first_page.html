@@ -1,0 +1,140 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Different number of items on the first page &mdash; Django Endless Pagination Vue 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="Django Endless Pagination Vue 1.0 documentation" href="index.html" />
+    <link rel="next" title="Getting the current page number" href="current_page_number.html" />
+    <link rel="prev" title="Lazy pagination" href="lazy_pagination.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="current_page_number.html" title="Getting the current page number"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="lazy_pagination.html" title="Lazy pagination"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">Django Endless Pagination Vue 1.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="different-number-of-items-on-the-first-page">
+<h1>Different number of items on the first page<a class="headerlink" href="#different-number-of-items-on-the-first-page" title="Permalink to this headline">¶</a></h1>
+<p>Sometimes you might want to show on the first page a different number of
+items than on subsequent pages (e.g. in a movie detail page you want to show
+4 images of the movie as a reminder, making the user click to see the next 20
+images). To achieve this, use the <a class="reference internal" href="templatetags_reference.html#templatetags-paginate"><em>paginate</em></a> or
+<a class="reference internal" href="templatetags_reference.html#templatetags-lazy-paginate"><em>lazy_paginate</em></a> tags with comma separated <em>first page</em> and
+<em>per page</em> arguments, e.g.:</p>
+<div class="highlight-html+django"><div class="highlight"><pre><span></span><span class="cp">{%</span> <span class="k">load</span> <span class="nv">endless</span> <span class="cp">%}</span>
+
+<span class="cp">{%</span> <span class="k">lazy_paginate</span> <span class="m">4</span><span class="o">,</span><span class="m">20</span> <span class="nv">entries</span> <span class="cp">%}</span>
+<span class="cp">{%</span> <span class="k">for</span> <span class="nv">entry</span> <span class="k">in</span> <span class="nv">entries</span> <span class="cp">%}</span>
+    <span class="c">{# your code to show the entry #}</span>
+<span class="cp">{%</span> <span class="k">endfor</span> <span class="cp">%}</span>
+<span class="cp">{%</span> <span class="k">show_more</span> <span class="cp">%}</span>
+</pre></div>
+</div>
+<p>This code will display 4 entries on the first page and 20 entries on the other
+pages.</p>
+<p>Of course the <em>first page</em> and <em>per page</em> arguments can be passed
+as template variables, e.g.:</p>
+<div class="highlight-html+django"><div class="highlight"><pre><span></span><span class="cp">{%</span> <span class="k">lazy_paginate</span> <span class="nv">first_page</span><span class="o">,</span><span class="nv">per_page</span> <span class="nv">entries</span> <span class="cp">%}</span>
+</pre></div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="lazy_pagination.html"
+                        title="previous chapter">Lazy pagination</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="current_page_number.html"
+                        title="next chapter">Getting the current page number</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/different_first_page.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="current_page_number.html" title="Getting the current page number"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="lazy_pagination.html" title="Lazy pagination"
+             >previous</a> |</li>
+        <li><a href="index.html">Django Endless Pagination Vue 1.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2009-2017, Francesco Banconi and Martin Peveri.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>
