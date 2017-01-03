@@ -4,6 +4,15 @@
 */
 Vue.directive('endlessPagination', {
     bind: function (el, binding, arg) {
+        // Execute tag scripts after ajax
+        function evalScripts(e) {
+            var scripts = e.getElementsByTagName("script");
+			for (var i = 0; i < scripts.length; ++i) {
+			    var script = scripts[i];
+			    eval(script.innerHTML);
+			}
+        }
+
         // Vanilla Ajax
         function getAjax(url, params, callback) {
             var request = new XMLHttpRequest();
@@ -175,6 +184,8 @@ Vue.directive('endlessPagination', {
                     getAjax(context.url, {querystring_key: context.key}, function(fragment) {
                         var e = document.createElement('div');
                         e.innerHTML = fragment;
+                        evalScripts(e);
+                        
                         if (container.parentElement != null ){
                             container.parentElement.appendChild(e);
                             container.remove();
@@ -232,6 +243,7 @@ Vue.directive('endlessPagination', {
                     // Send the Ajax request.
                     getAjax(context.url, {querystring_key: context.key}, function(fragment) {
                         page_template.innerHTML = fragment;
+                        evalScripts(page_template);
                         onCompleted.apply(link, [context, fragment.trim()]);
                     });
                 }
