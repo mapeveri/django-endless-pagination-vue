@@ -182,13 +182,10 @@ Vue.directive('endlessPagination', {
                 if (onClick.apply(link, [context]) !== false) {
                     // Send the Ajax request.
                     getAjax(context.url, {querystring_key: context.key}, function(fragment) {
-                        var e = document.createElement('div');
-                        e.innerHTML = fragment;
-                        evalScripts(e);
-                        
                         if (container.parentElement != null ){
-                            container.parentElement.appendChild(e);
+                            container.parentElement.insertAdjacentHTML('beforeend', fragment);
                             container.remove();
+                            evalScripts(container);
                             // Increase the number of loaded pages.
                             loadedPages += 1;
                             // Fire onCompleted callback.
