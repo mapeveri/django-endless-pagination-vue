@@ -9,3 +9,4 @@ migrations
 /django-endless-pagination-vue.egg-info/
 /.venv/
 /.venv3/
+.pypirc
