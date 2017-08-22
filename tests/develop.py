@@ -17,7 +17,7 @@ else:
 
 
 TESTS = os.path.abspath(os.path.dirname(__file__))
-REQUIREMENTS = os.path.join(TESTS, 'requirements.pip')
+REQUIREMENTS = os.path.join(TESTS, 'requirements.txt')
 WITH_VENV = os.path.join(TESTS, 'with_venv.sh')
 VENV = os.path.abspath(os.path.join(TESTS, '..', VENV_NAME))
 

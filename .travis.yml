@@ -10,7 +10,7 @@ branches:
 
 before_install:
   - cd tests
-  - pip install -r requirements.pip
+  - pip install -r requirements.txt
   - cd ..
 
 install:
