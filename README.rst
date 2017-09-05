@@ -11,9 +11,6 @@ Django Endless Pagination Vue
 .. image:: https://badge.fury.io/py/django-endless-pagination-vue.svg
     :target: http://badge.fury.io/py/django-endless-pagination-vue
 
-.. image:: https://img.shields.io/pypi/dm/django-endless-pagination-vue.svg
-   :target: https://pypi.python.org/pypi/django-endless-pagination-vue
-
 Django Endless Pagination Vue is a fork of the excellent application django-endless-pagination created by Francesco Banconi.
 This application get all code of version 2.0 and update for working in django >= 1.7 in addition to migration code jquery to vue.js.
 
